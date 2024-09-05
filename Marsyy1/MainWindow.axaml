@@ -6,35 +6,60 @@
         x:Class="Marsyy1.MainWindow"
 		x:CompileBindings="False"
         Title="Marsyy1">
-	<Grid >
-	 <Border >
-	   <ListBox
-			Margin="10"
-			DockPanel.Dock="Top"
-			Name="ClientListBox"	>
-		  <ListBox.ItemTemplate>
-			<DataTemplate >
-				<Border BorderThickness="1"
-						BorderBrush="Black">
-					<StackPanel Spacing="20"  Orientation="Horizontal"  >
-						<Grid  ColumnDefinitions="*,*,*,*,*,*,*,*,*" ShowGridLines="False">
-						<TextBlock Width="150" Margin="2" Grid.Column="0" Text="{Binding Firstname}"/>
-						<TextBlock Width="150" Margin="2" Grid.Column="1" Text="{Binding Lastname}"/>
-						<TextBlock Width="150" Margin="2" Grid.Column="2" Text="{Binding Patronymic}"/>
-						<TextBlock Width="50"  Margin="2" Grid.Column="3" Text="{Binding Gender}"/>
-						<TextBlock Width="100" Margin="2" Grid.Column="4" Text="{Binding Birthday}"/>
-						<TextBlock Width="190" Margin="2" Grid.Column="5" Text="{Binding Email}"/>
-						<TextBlock Width="250" Margin="2" Grid.Column="6" Text="{Binding Phone}"/>
-						<TextBlock Width="150" Margin="2" Grid.Column="7" Text="{Binding Dataofvisit}"/>
-						<TextBlock Width="150" Margin="2" Grid.Column="8" Text="{Binding Countofvisit}"/>
-						<TextBlock Width="150" Margin="2" Grid.Column="9" Text="{Binding Photopath}"/>
-						</Grid>
-					 </StackPanel>
-				</Border>
-			</DataTemplate>
-		 </ListBox.ItemTemplate>
-	   </ListBox>
-	  </Border>
+	<Grid RowDefinitions="*,*, *">
+		<StackPanel Margin="10 " Orientation="Horizontal" Background="Yellow">
+			<AutoCompleteBox  Margin="10" Width="300"></AutoCompleteBox>
+			<ComboBox  Margin="10" SelectedIndex="0">
+				<ComboBoxItem>Все</ComboBoxItem>
+				<ComboBoxItem>Мужчина</ComboBoxItem>
+				<ComboBoxItem>Женщина</ComboBoxItem>
+				
+			</ComboBox>
+			<ComboBox  Margin="10" SelectedIndex="0">
+				<ComboBoxItem>Все</ComboBoxItem>
+				<ComboBoxItem>По фамилии</ComboBoxItem>
+				<ComboBoxItem> По дате последнего посещения</ComboBoxItem>
+				<ComboBoxItem> ПО количеству посещений</ComboBoxItem>
+
+			</ComboBox>
+		
+		</StackPanel>
+			
+		
+		<Grid Grid.Row="1" Background="Brown">
+			<Border >
+				<ListBox
+					 Margin="10"
+					 DockPanel.Dock="Top"
+					 Name="ClientListBox"	>
+					<ListBox.ItemTemplate>
+						<DataTemplate >
+							<Border BorderThickness="1"
+									BorderBrush="Black">
+								<StackPanel Spacing="20"  Orientation="Horizontal"  >
+									<Grid  ColumnDefinitions="*,*,*,*,*,*,*,*,*" ShowGridLines="False">
+										<TextBlock Width="150" Margin="2" Grid.Column="0" Text="{Binding Firstname}"/>
+										<TextBlock Width="150" Margin="2" Grid.Column="1" Text="{Binding Lastname}"/>
+										<TextBlock Width="150" Margin="2" Grid.Column="2" Text="{Binding Patronymic}"/>
+										<TextBlock Width="50"  Margin="2" Grid.Column="3" Text="{Binding Gender}"/>
+										<TextBlock Width="100" Margin="2" Grid.Column="4" Text="{Binding Birthday}"/>
+										<TextBlock Width="190" Margin="2" Grid.Column="5" Text="{Binding Email}"/>
+										<TextBlock Width="250" Margin="2" Grid.Column="6" Text="{Binding Phone}"/>
+										<TextBlock Width="150" Margin="2" Grid.Column="7" Text="{Binding Dataofvisit}"/>
+										<TextBlock Width="150" Margin="2" Grid.Column="8" Text="{Binding Countofvisit}"/>
+										<TextBlock Width="150" Margin="2" Grid.Column="9" Text="{Binding Photopath}"/>
+									</Grid>
+								</StackPanel>
+							</Border>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</Border>
+		</Grid>
+		
+		<StackPanel Grid.Row="2" Background="green"> </StackPanel>
+		
+	
 	</Grid>
 	
 </Window>
