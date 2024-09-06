@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Avalonia.Media;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Marsyy1.Models;
 
@@ -11,5 +13,7 @@ public partial class Tag
 
     public string Color { get; set; } = null!;
 
-    public virtual ICollection<Tagofclient> Tagofclients { get; set; } = new List<Tagofclient>();
+    public SolidColorBrush TagColor => SolidColorBrush.Parse($"#{Color}");
+
+    public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
 }

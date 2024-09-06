@@ -26,8 +26,6 @@ public partial class User735Context : DbContext
 
     public virtual DbSet<Tag> Tags { get; set; }
 
-    public virtual DbSet<Tagofclient> Tagofclients { get; set; }
-
     public virtual DbSet<Visit> Visits { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -72,6 +70,25 @@ public partial class User735Context : DbContext
                 .HasForeignKey(d => d.Gender)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("client_gender_fk");
+
+            entity.HasMany(d => d.Tags).WithMany(p => p.Clients)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Tagofclient",
+                    r => r.HasOne<Tag>().WithMany()
+                        .HasForeignKey("Tagid")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("fk_tagofclient_tag"),
+                    l => l.HasOne<Client>().WithMany()
+                        .HasForeignKey("Clientid")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("fk_tagofclient_client"),
+                    j =>
+                    {
+                        j.HasKey("Clientid", "Tagid").HasName("tagofclient_pk");
+                        j.ToTable("tagofclient");
+                        j.IndexerProperty<int>("Clientid").HasColumnName("clientid");
+                        j.IndexerProperty<int>("Tagid").HasColumnName("tagid");
+                    });
         });
 
         modelBuilder.Entity<Document>(entity =>
@@ -139,29 +156,6 @@ public partial class User735Context : DbContext
             entity.Property(e => e.Title)
                 .HasMaxLength(30)
                 .HasColumnName("title");
-        });
-
-        modelBuilder.Entity<Tagofclient>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("tagofclient_pk");
-
-            entity.ToTable("tagofclient");
-
-            entity.Property(e => e.Id)
-                .UseIdentityAlwaysColumn()
-                .HasColumnName("id");
-            entity.Property(e => e.Clientid).HasColumnName("clientid");
-            entity.Property(e => e.Tagid).HasColumnName("tagid");
-
-            entity.HasOne(d => d.Client).WithMany(p => p.Tagofclients)
-                .HasForeignKey(d => d.Clientid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_tagofclient_client");
-
-            entity.HasOne(d => d.Tag).WithMany(p => p.Tagofclients)
-                .HasForeignKey(d => d.Tagid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_tagofclient_tag");
         });
 
         modelBuilder.Entity<Visit>(entity =>

@@ -31,5 +31,5 @@ public partial class Client
 
     public virtual Gender GenderNavigation { get; set; } = null!;
 
-    public virtual ICollection<Tagofclient> Tagofclients { get; set; } = new List<Tagofclient>();
+    public virtual ICollection<Tag> Tags { get; set; } = new List<Tag>();
 }

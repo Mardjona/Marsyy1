@@ -6,9 +6,9 @@
         x:Class="Marsyy1.MainWindow"
 		x:CompileBindings="False"
         Title="Marsyy1">
-	<Grid RowDefinitions="*,*, *">
-		<StackPanel Margin="10 " Orientation="Horizontal" Background="Yellow">
-			<AutoCompleteBox  Margin="10" Width="300"></AutoCompleteBox>
+	<Grid RowDefinitions="*,550, *">
+		<StackPanel  Orientation="Horizontal" Background="Yellow">
+			<AutoCompleteBox Watermark="Поиск" Margin="10" Width="300"></AutoCompleteBox>
 			<ComboBox  Margin="10" SelectedIndex="0">
 				<ComboBoxItem>Все</ComboBoxItem>
 				<ComboBoxItem>Мужчина</ComboBoxItem>
@@ -22,34 +22,60 @@
 				<ComboBoxItem> ПО количеству посещений</ComboBoxItem>
 
 			</ComboBox>
+			<TextBlock Text="Показывать:" Margin="100 20 5 4 "/>
+			<ComboBox x:Name="cmbDisplayOptions" SelectedIndex="0" Margin="10">
+				<ComboBoxItem>Все</ComboBoxItem>
+				<ComboBoxItem>50</ComboBoxItem>
+				<ComboBoxItem>200</ComboBoxItem>
+				<ComboBoxItem>10</ComboBoxItem>
+			</ComboBox>
+			<Button VerticalAlignment="Top" Content="Добавить новых клиентов" Margin="10"></Button>
+			
+			   <TextBlock HorizontalAlignment="Right" Margin="250 13" FontSize="20" Name="Admin">Admin</TextBlock>
+			
 		
 		</StackPanel>
 			
 		
 		<Grid Grid.Row="1" Background="Brown">
 			<Border >
-				<ListBox
+				<ListBox MinWidth="1000"
 					 Margin="10"
 					 DockPanel.Dock="Top"
 					 Name="ClientListBox"	>
 					<ListBox.ItemTemplate>
-						<DataTemplate >
+						<DataTemplate>
 							<Border BorderThickness="1"
 									BorderBrush="Black">
-								<StackPanel Spacing="20"  Orientation="Horizontal"  >
-									<Grid  ColumnDefinitions="*,*,*,*,*,*,*,*,*" ShowGridLines="False">
-										<TextBlock Width="150" Margin="2" Grid.Column="0" Text="{Binding Firstname}"/>
-										<TextBlock Width="150" Margin="2" Grid.Column="1" Text="{Binding Lastname}"/>
-										<TextBlock Width="150" Margin="2" Grid.Column="2" Text="{Binding Patronymic}"/>
-										<TextBlock Width="50"  Margin="2" Grid.Column="3" Text="{Binding Gender}"/>
-										<TextBlock Width="100" Margin="2" Grid.Column="4" Text="{Binding Birthday}"/>
-										<TextBlock Width="190" Margin="2" Grid.Column="5" Text="{Binding Email}"/>
-										<TextBlock Width="250" Margin="2" Grid.Column="6" Text="{Binding Phone}"/>
-										<TextBlock Width="150" Margin="2" Grid.Column="7" Text="{Binding Dataofvisit}"/>
-										<TextBlock Width="150" Margin="2" Grid.Column="8" Text="{Binding Countofvisit}"/>
-										<TextBlock Width="150" Margin="2" Grid.Column="9" Text="{Binding Photopath}"/>
+									<Grid  ColumnDefinitions="*,*,*,*,*,*,1.5*,1.5*,*,*,*,*,*,*" ShowGridLines="True">
+										<TextBlock Margin="2" Grid.Column="0" Text="{Binding Id}"/>
+										<TextBlock  Margin="2" Grid.Column="1" Text="{Binding Firstname}"/>
+										<TextBlock  Margin="2" Grid.Column="2" Text="{Binding Lastname}"/>
+										<TextBlock  Margin="2" Grid.Column="3" Text="{Binding Patronymic}"/>
+										<TextBlock  Margin="2" Grid.Column="4" Text="{Binding Gender}"/>
+										<TextBlock Margin="2" Grid.Column="5" Text="{Binding Birthday}"/>
+										<TextBlock  FontSize="12" Margin="2" Grid.Column="6" Text="{Binding Email}"/>
+										<TextBlock  Margin="2" Grid.Column="7" Text="{Binding Phone}"/>
+										<TextBlock  Margin="2" Grid.Column="8" Text="{Binding Dataofvisit}"/>
+										<TextBlock Margin="2" Grid.Column="9" Text="{Binding Countofvisit}"/>
+										<TextBlock  Margin="2" Grid.Column="10" Text="{Binding Photopath}"/>
+										
+										<ListBox Grid.Column="11" ItemsSource="{Binding Tags}">
+											<ListBox.ItemTemplate>
+												<DataTemplate>
+													<TextBlock Foreground="White" Background="{Binding TagColor}" Height="15" Width="70" Margin="2" Text="{Binding Title}"/>
+												</DataTemplate>
+											</ListBox.ItemTemplate>
+										</ListBox>
+										
+										<StackPanel Grid.Column="12">
+											<Button Content="Удалить" HorizontalAlignment="Center" VerticalAlignment="Top" > </Button>
+											<Button Content="Редактировать" HorizontalAlignment="Right" VerticalAlignment="Bottom"> </Button>
+										</StackPanel>
+
+										<TextBlock  Margin="2" Grid.Column="14" Text="здесь будет последнее посещение"/>
+										
 									</Grid>
-								</StackPanel>
 							</Border>
 						</DataTemplate>
 					</ListBox.ItemTemplate>
@@ -57,7 +83,10 @@
 			</Border>
 		</Grid>
 		
-		<StackPanel Grid.Row="2" Background="green"> </StackPanel>
+		<StackPanel Orientation="Horizontal" Grid.Row="2" Background="Olive">
+			<Button Content="Предыдущая страница"> </Button>
+			<Button HorizontalAlignment="Right" Content="Следующая страница страница"> </Button>
+		</StackPanel>
 		
 	
 	</Grid>
