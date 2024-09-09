@@ -52,7 +52,9 @@ public partial class User735Context : DbContext
             entity.Property(e => e.Firstname)
                 .HasMaxLength(50)
                 .HasColumnName("firstname");
-            entity.Property(e => e.Gender).HasColumnName("gender");
+            entity.Property(e => e.Gender)
+                .HasMaxLength(10)
+                .HasColumnName("gender");
             entity.Property(e => e.Lastname)
                 .HasMaxLength(50)
                 .HasColumnName("lastname");
@@ -128,12 +130,12 @@ public partial class User735Context : DbContext
 
         modelBuilder.Entity<Gender>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("pk_gender");
+            entity.HasKey(e => e.Id).HasName("gender_pk");
 
             entity.ToTable("gender");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .HasMaxLength(10)
                 .HasColumnName("id");
             entity.Property(e => e.Name)
                 .HasMaxLength(10)

@@ -19,7 +19,7 @@ public partial class Client
 
     public string Photopath { get; set; } = null!;
 
-    public int Gender { get; set; }
+    public string Gender { get; set; } = null!;
 
     public DateOnly Dataofvisit { get; set; }
 

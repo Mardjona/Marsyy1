@@ -6,16 +6,16 @@
         x:Class="Marsyy1.MainWindow"
 		x:CompileBindings="False"
         Title="Marsyy1">
-	<Grid RowDefinitions="*,550, *">
+	<Grid RowDefinitions="*,600, *">
 		<StackPanel  Orientation="Horizontal" Background="Yellow">
 			<AutoCompleteBox Watermark="Поиск" Margin="10" Width="300"></AutoCompleteBox>
-			<ComboBox  Margin="10" SelectedIndex="0">
+			<ComboBox Name="FilterComboBox" Margin="10" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
 				<ComboBoxItem>Все</ComboBoxItem>
 				<ComboBoxItem>Мужчина</ComboBoxItem>
 				<ComboBoxItem>Женщина</ComboBoxItem>
 				
 			</ComboBox>
-			<ComboBox  Margin="10" SelectedIndex="0">
+			<ComboBox Name="SortCombobox" Margin="10" SelectedIndex="0"  SelectionChanged="SortCombobox_SelectionChanged">
 				<ComboBoxItem>Все</ComboBoxItem>
 				<ComboBoxItem>По фамилии</ComboBoxItem>
 				<ComboBoxItem> По дате последнего посещения</ComboBoxItem>
@@ -23,7 +23,7 @@
 
 			</ComboBox>
 			<TextBlock Text="Показывать:" Margin="100 20 5 4 "/>
-			<ComboBox x:Name="cmbDisplayOptions" SelectedIndex="0" Margin="10">
+			<ComboBox  SelectedIndex="0" Margin="10">
 				<ComboBoxItem>Все</ComboBoxItem>
 				<ComboBoxItem>50</ComboBoxItem>
 				<ComboBoxItem>200</ComboBoxItem>
@@ -32,13 +32,16 @@
 			<Button VerticalAlignment="Top" Content="Добавить новых клиентов" Margin="10"></Button>
 			
 			   <TextBlock HorizontalAlignment="Right" Margin="250 13" FontSize="20" Name="Admin">Admin</TextBlock>
-			
-		
+
+
 		</StackPanel>
-			
+
+		
 		
 		<Grid Grid.Row="1" Background="Brown">
-			<Border >
+			<Border Background="Orange" >
+				
+				
 				<ListBox MinWidth="1000"
 					 Margin="10"
 					 DockPanel.Dock="Top"
@@ -46,8 +49,13 @@
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<Border BorderThickness="1"
-									BorderBrush="Black">
-									<Grid  ColumnDefinitions="*,*,*,*,*,*,1.5*,1.5*,*,*,*,*,*,*" ShowGridLines="True">
+									BorderBrush="Orange">
+							
+									
+								
+								
+									<Grid  ColumnDefinitions="*,*,*,*,*,*,1.5*,1.5*,*,*,*,*,*,*"  ShowGridLines="True">
+										
 										<TextBlock Margin="2" Grid.Column="0" Text="{Binding Id}"/>
 										<TextBlock  Margin="2" Grid.Column="1" Text="{Binding Firstname}"/>
 										<TextBlock  Margin="2" Grid.Column="2" Text="{Binding Lastname}"/>
@@ -58,7 +66,7 @@
 										<TextBlock  Margin="2" Grid.Column="7" Text="{Binding Phone}"/>
 										<TextBlock  Margin="2" Grid.Column="8" Text="{Binding Dataofvisit}"/>
 										<TextBlock Margin="2" Grid.Column="9" Text="{Binding Countofvisit}"/>
-										<TextBlock  Margin="2" Grid.Column="10" Text="{Binding Photopath}"/>
+										<TextBlock  Margin="2" Grid.Column="10" Text="{Binding Photopath}"/>  
 										
 										<ListBox Grid.Column="11" ItemsSource="{Binding Tags}">
 											<ListBox.ItemTemplate>
