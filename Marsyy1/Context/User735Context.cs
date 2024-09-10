@@ -20,8 +20,6 @@ public partial class User735Context : DbContext
 
     public virtual DbSet<Document> Documents { get; set; }
 
-    public virtual DbSet<Documentofclient> Documentofclients { get; set; }
-
     public virtual DbSet<Gender> Genders { get; set; }
 
     public virtual DbSet<Tag> Tags { get; set; }
@@ -73,6 +71,25 @@ public partial class User735Context : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("client_gender_fk");
 
+            entity.HasMany(d => d.Documents).WithMany(p => p.Clients)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Documentofclient",
+                    r => r.HasOne<Document>().WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("documentofclient_document_fk"),
+                    l => l.HasOne<Client>().WithMany()
+                        .HasForeignKey("Clientid")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("documentofclient_client_fk"),
+                    j =>
+                    {
+                        j.HasKey("Clientid", "DocumentId").HasName("documentofclient_pk");
+                        j.ToTable("documentofclient");
+                        j.IndexerProperty<int>("Clientid").HasColumnName("clientid");
+                        j.IndexerProperty<int>("DocumentId").HasColumnName("document_id");
+                    });
+
             entity.HasMany(d => d.Tags).WithMany(p => p.Clients)
                 .UsingEntity<Dictionary<string, object>>(
                     "Tagofclient",
@@ -102,30 +119,9 @@ public partial class User735Context : DbContext
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
                 .HasColumnName("id");
-            entity.Property(e => e.Documentpath).HasColumnName("documentpath");
-        });
-
-        modelBuilder.Entity<Documentofclient>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("pk_clientservice");
-
-            entity.ToTable("documentofclient");
-
-            entity.Property(e => e.Id)
-                .UseIdentityAlwaysColumn()
-                .HasColumnName("id");
-            entity.Property(e => e.Clientid).HasColumnName("clientid");
-            entity.Property(e => e.DocumentId).HasColumnName("document_id");
-
-            entity.HasOne(d => d.Client).WithMany(p => p.Documentofclients)
-                .HasForeignKey(d => d.Clientid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("documentofclient_client_fk");
-
-            entity.HasOne(d => d.Document).WithMany(p => p.Documentofclients)
-                .HasForeignKey(d => d.DocumentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("documentofclient_document_fk");
+            entity.Property(e => e.Documentpath)
+                .HasColumnType("character varying")
+                .HasColumnName("documentpath");
         });
 
         modelBuilder.Entity<Gender>(entity =>
@@ -162,21 +158,18 @@ public partial class User735Context : DbContext
 
         modelBuilder.Entity<Visit>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("visit");
+            entity.HasKey(e => e.Id).HasName("visit_pk");
 
-            entity.HasIndex(e => e.Id, "visit_unique").IsUnique();
+            entity.ToTable("visit");
 
+            entity.Property(e => e.Id)
+                .UseIdentityAlwaysColumn()
+                .HasColumnName("id");
             entity.Property(e => e.ClientId).HasColumnName("client_id");
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Starttime)
-                .HasColumnType("character varying")
-                .HasColumnName("starttime");
+            entity.Property(e => e.Lastdate).HasColumnName("lastdate");
 
-            entity.HasOne(d => d.IdNavigation).WithOne()
-                .HasForeignKey<Visit>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+            entity.HasOne(d => d.Client).WithMany(p => p.Visits)
+                .HasForeignKey(d => d.ClientId)
                 .HasConstraintName("visit_client_fk");
         });
 

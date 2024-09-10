@@ -7,7 +7,7 @@ public partial class Document
 {
     public int Id { get; set; }
 
-    public int Documentpath { get; set; }
+    public string? Documentpath { get; set; }
 
-    public virtual ICollection<Documentofclient> Documentofclients { get; set; } = new List<Documentofclient>();
+    public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
 }
