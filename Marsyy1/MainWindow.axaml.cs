@@ -4,31 +4,48 @@ using Metsys.Bson;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Marsyy1
 {
     public partial class MainWindow : Window
     {
-        private string _searchQuery;
-          
-
-
         public MainWindow()
         {
             InitializeComponent();
             Loadservices();
           
         }
-
+      
 
 
         private void Loadservices()
+
+
         {
+            if (FilterComboBox == null) return;
+            if (SortCombobox == null) return;
+            if (SearchTextBox == null) return;
+
             List<Client> clients = Helper.Database.Clients.Include(x => x.Visits).ToList();
+
+          
+
+
+            if(!string.IsNullOrEmpty(SearchTextBox.Text))
+            {
+                clients = clients.Where(t =>
+                    t.Firstname.ToLower().Contains(SearchTextBox.Text!.ToLower()) ||
+                    t.Lastname.ToLower().Contains(SearchTextBox.Text!.ToLower() ) ||
+                    t.Patronymic.ToLower().Contains(SearchTextBox.Text!.ToLower()) ||
+                    t.Email.ToLower().Contains(SearchTextBox.Text!.ToLower()) || 
+                    t.Phone.ToLower().Contains(SearchTextBox.Text!.ToLower()))
+                    .ToList();
+            }
+
            
-          if (FilterComboBox == null) return;
-          if (SortCombobox == null) return;
+          
             
 
             switch (FilterComboBox.SelectedIndex)
@@ -73,6 +90,6 @@ namespace Marsyy1
 
         private void ComboBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e) => Loadservices();
         private void SortCombobox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e) => Loadservices();
-
+        private void TextBox_TextChanged(object? sender, Avalonia.Controls.TextChangedEventArgs e) => Loadservices();
     }
 }
