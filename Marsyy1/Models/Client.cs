@@ -29,7 +29,7 @@ public partial class Client
 
     public DateOnly Birthday { get; set; }
 
-    public int? Countofvisit { get; set; }
+    public int? Countofvisit { get; set;     }
 
     public virtual Gender GenderNavigation { get; set; } = null!;
 

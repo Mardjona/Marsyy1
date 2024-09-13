@@ -1,7 +1,9 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Marsyy1.Models;
 using Metsys.Bson;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,8 +29,10 @@ namespace Marsyy1
             if (FilterComboBox == null) return;
             if (SortCombobox == null) return;
             if (SearchTextBox == null) return;
+            if (onoff == null) return;
+            
 
-            List<Client> clients = Helper.Database.Clients.Include(x => x.Visits).ToList();
+            List<Client> clients = Helper.Database.Clients.Include(x => x.Visits).Include(x => x.Tags).ToList();
 
           
 
@@ -44,7 +48,21 @@ namespace Marsyy1
                     .ToList();
             }
 
-           
+           switch(PageNavig.SelectedIndex)
+            {
+                case 0: 
+                    clients = clients.ToList(); break;
+                case 1: 
+                    clients = clients.Where(x => x.Id  >= 510 && x.Id < 520).ToList();
+                    break;
+
+                case 2:
+                    clients = clients.Where(x => x.Id >= 510 && x.Id < 550).ToList();
+                    break;
+                case 3:
+                    clients = clients.Where(x => x.Id >= 510 && x.Id < 710).ToList();
+                    break;
+            }
           
             
 
@@ -80,16 +98,31 @@ namespace Marsyy1
 
             }
 
-            ClientListBox.ItemsSource = clients.ToList();
+            if(onoff.IsChecked == true  )
+            {
+                clients = clients.Where(x => x.Birthday.Month==DateAndTime.Now.Month).ToList();
+            }
+            else
+            {
+                clients = clients.ToList();
+            }
+
+          ClientListBox.ItemsSource = clients.ToList();
 
 
         }
 
 
        
-
+        
         private void ComboBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e) => Loadservices();
         private void SortCombobox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e) => Loadservices();
         private void TextBox_TextChanged(object? sender, Avalonia.Controls.TextChangedEventArgs e) => Loadservices();
+        private void CheckBox_Checked(object? sender, Avalonia.Interactivity.RoutedEventArgs e) => Loadservices();
+
+        private void CheckBox_Unchecked(object? sender, Avalonia.Interactivity.RoutedEventArgs e) => Loadservices();
+        private void PageNavig_Selection(object? sender, Avalonia.Controls.SelectionChangedEventArgs e) => Loadservices();
+
+
     }
 }
