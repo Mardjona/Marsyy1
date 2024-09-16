@@ -6,44 +6,45 @@
         x:Class="Marsyy1.MainWindow"
 		x:CompileBindings="False"
         Title="Marsyy1">
-	
+
 	<Grid RowDefinitions="auto, auto *, auto" ShowGridLines="False">
-		
+
 		<StackPanel Orientation="Horizontal" Background="Yellow">
-			
+
 			<TextBox Watermark="Поиск" Margin="10" Width="300" Name="SearchTextBox" TextChanged="TextBox_TextChanged"/>
-		  
+
 			<ComboBox Name="FilterComboBox" Margin="10" SelectedIndex="0" SelectionChanged="ComboBox_SelectionChanged">
 				<ComboBoxItem>Все</ComboBoxItem>
 				<ComboBoxItem>Мужчина</ComboBoxItem>
 				<ComboBoxItem>Женщина</ComboBoxItem>
 			</ComboBox>
-		  
+
 			<ComboBox Name="SortCombobox" Margin="10" SelectedIndex="0"  SelectionChanged="SortCombobox_SelectionChanged">
 				<ComboBoxItem>Все</ComboBoxItem>
 				<ComboBoxItem>По фамилии</ComboBoxItem>
-				<ComboBoxItem> По дате последнего посещения</ComboBoxItem>
-				<ComboBoxItem> ПО количеству посещений</ComboBoxItem>
+				<ComboBoxItem>По дате последнего посещения</ComboBoxItem>
+				<ComboBoxItem>ПО количеству посещений</ComboBoxItem>
 			</ComboBox>
-		  
+
 			<TextBlock Text="Показывать:" Margin="100 20 5 4 "/>
-		  
+
 			<ComboBox Name="PageNavig" SelectedIndex="0" Margin="10" SelectionChanged="PageNavig_Selection">
 				<ComboBoxItem>Все</ComboBoxItem>
 				<ComboBoxItem>10</ComboBoxItem>
 				<ComboBoxItem>50</ComboBoxItem>
 				<ComboBoxItem>200</ComboBoxItem>
 			</ComboBox>
-		  
+
 			<Button VerticalAlignment="Top" Content="Добавить новых клиентов" Margin="10"/>
 
 			<TextBlock  Margin="20"  Text="Д/Р в тек.месяце"></TextBlock>
+
 			<CheckBox Name="onoff" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
-			
-		    <TextBlock HorizontalAlignment="Right" Margin="100 13" FontSize="20" Name="Admin" Text="Админ"/>
-			
+
+			<TextBlock HorizontalAlignment="Right" Margin="100 13" FontSize="20" Name="Admin" Text="Админ"/>
+
 		</StackPanel>
-		
+
 		<StackPanel Margin="10 0" Orientation="Horizontal" Grid.Row="1"  >
 			<TextBlock Margin="5" Text="ID"></TextBlock>
 			<TextBlock Margin="20 2"  Text="Фамилия"></TextBlock>
@@ -59,55 +60,60 @@
 			<TextBlock Margin="15 2" Text="Фото"></TextBlock>
 			<TextBlock Margin="70 2" Text="Теги"></TextBlock>
 		</StackPanel>
-		
+
 		<Grid Grid.Row="2" >
 			<Border Background="Silver" >
 				<ListBox  MinWidth="1000"
 						  Name="ClientListBox"
+						  PointerReleased="Edit"
+						  SelectionMode="Multiple"
+						 
 						  ItemsSource="{Binding _filteredClients}">
-					  <ListBox.ItemTemplate>
+					<ListBox.ItemTemplate>
 						<DataTemplate>
-							 <Border BorderThickness="1"
-									 BorderBrush="Orange">
-								 <Grid ColumnDefinitions="30,*,*,*,*,*,1.5*,1.5*,*,*,*,*,*,*" ShowGridLines="True">
-								   <TextBlock Margin="2" Grid.Column="0" Text="{Binding Id}"/>
-								   <TextBlock Margin="2" Grid.Column="1" Text="{Binding Firstname}"/>
-								   <TextBlock Margin="2" Grid.Column="2" Text="{Binding Lastname}"/>
-								   <TextBlock Margin="2" Grid.Column="3" Text="{Binding Patronymic}"/>
-								   <TextBlock Margin="2" Grid.Column="4" Text="{Binding Gender}"/>
-								   <TextBlock Margin="2" Grid.Column="5" Text="{Binding Birthday}"/>
-								   <TextBlock Margin="2" Grid.Column="6" Text="{Binding Email}" FontSize="12"/>
-								   <TextBlock Margin="2" Grid.Column="7" Text="{Binding Phone}"/>
-								   <TextBlock Margin="2" Grid.Column="8" Text="{Binding Dataofvisit}"/>
-								   <TextBlock Margin="2" Grid.Column="9" Text="{Binding Dataofvisits}"/>
-								   <TextBlock Margin="2" Grid.Column="10" Text="{Binding Countofvisit}"/>
-								   <Image Margin="2" Grid.Column="11" Source= "{Binding Image}"/>
-								   <ListBox Grid.Column="12" ItemsSource="{Binding Tags}">
-									   <ListBox.ItemTemplate>
-										   <DataTemplate>
-											   <TextBlock Foreground="White" Background="{Binding ColorP}"  Text="{Binding Title}"/>
-										   </DataTemplate>
-									   </ListBox.ItemTemplate>
-								   </ListBox>
-									 
-								<StackPanel Grid.Column="13">
-									<Button Content="Удалить" HorizontalAlignment="Center" VerticalAlignment="Top" > </Button>
-									<Button Content="Редактировать" HorizontalAlignment="Right" VerticalAlignment="Bottom"> </Button>
-								</StackPanel>
-							</Grid>
-					      </Border>
-				      </DataTemplate>
-			      </ListBox.ItemTemplate>
-		      </ListBox>
-		   </Border>
+							<Border BorderThickness="1"
+									BorderBrush="Orange"
+									
+								>
+								<Grid ColumnDefinitions="30,*,*,*,*,*,1.5*,1.5*,*,*,*,*,*,*" ShowGridLines="True">
+									<TextBlock Margin="2" Grid.Column="0" Text="{Binding Id}"/>
+									<TextBlock Margin="2" Grid.Column="1" Text="{Binding Firstname}"/>
+									<TextBlock Margin="2" Grid.Column="2" Text="{Binding Lastname}"/>
+									<TextBlock Margin="2" Grid.Column="3" Text="{Binding Patronymic}"/>
+									<TextBlock Margin="2" Grid.Column="4" Text="{Binding Gender}"/>
+									<TextBlock Margin="2" Grid.Column="5" Text="{Binding Birthday}"/>
+									<TextBlock Margin="2" Grid.Column="6" Text="{Binding Email}" FontSize="12"/>
+									<TextBlock Margin="2" Grid.Column="7" Text="{Binding Phone}"/>
+									<TextBlock Margin="2" Grid.Column="8" Text="{Binding Dataofvisit}"/>
+									<TextBlock Margin="2" Grid.Column="9" Text="{Binding Dataofvisits}"/>
+									<TextBlock Margin="2" Grid.Column="10" Text="{Binding Countofvisit}"/>
+									<Image Margin="2" Grid.Column="11" Source= "{Binding Image}"/>
+									<ListBox Grid.Column="12" ItemsSource="{Binding Tags}">
+										<ListBox.ItemTemplate>
+											<DataTemplate>
+												<TextBlock Foreground="White" Background="{Binding ColorP}"  Text="{Binding Title}"/>
+											</DataTemplate>
+										</ListBox.ItemTemplate>
+									</ListBox>
+
+									<StackPanel Grid.Column="13">
+										<Button Click="DeliteServices_Click"  Name="aaaaa" Content="Удалить" HorizontalAlignment="Center" VerticalAlignment="Top" Tag="{Binding Id}" ></Button>
+										<Button Content="Редактировать" HorizontalAlignment="Right" VerticalAlignment="Bottom"> </Button>
+									</StackPanel>
+								</Grid>
+							</Border>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</Border>
 		</Grid>
-		
+
 		<StackPanel Orientation="Horizontal" Grid.Row="3" Background="Olive">
 			<Button HorizontalAlignment="Left" Content="Предыдущая страница"> </Button>
 			<Button HorizontalAlignment="Right" Content="Следующая страница страница"> </Button>
 			<TextBlock Text="{Binding PageList}" ></TextBlock>
 		</StackPanel>
-		
+
 	</Grid>
-	
+
 </Window>

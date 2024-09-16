@@ -76,11 +76,9 @@ public partial class User735Context : DbContext
                     "Documentofclient",
                     r => r.HasOne<Document>().WithMany()
                         .HasForeignKey("DocumentId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("documentofclient_document_fk"),
                     l => l.HasOne<Client>().WithMany()
                         .HasForeignKey("Clientid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("documentofclient_client_fk"),
                     j =>
                     {
@@ -95,11 +93,9 @@ public partial class User735Context : DbContext
                     "Tagofclient",
                     r => r.HasOne<Tag>().WithMany()
                         .HasForeignKey("Tagid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("fk_tagofclient_tag"),
                     l => l.HasOne<Client>().WithMany()
                         .HasForeignKey("Clientid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("fk_tagofclient_client"),
                     j =>
                     {

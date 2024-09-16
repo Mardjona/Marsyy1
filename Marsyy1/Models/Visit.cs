@@ -7,9 +7,9 @@ public partial class Visit
 {
     public int Id { get; set; }
 
-    public int? ClientId { get; set; }
+    public int ClientId { get; set; }
 
     public DateOnly? Lastdate { get; set; }
 
-    public virtual Client? Client { get; set; }
+    public virtual Client Client { get; set; } = null!;
 }

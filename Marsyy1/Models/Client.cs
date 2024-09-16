@@ -29,7 +29,7 @@ public partial class Client
 
     public DateOnly Birthday { get; set; }
 
-    public int? Countofvisit { get; set;     }
+    public int? Countofvisit { get; set; }
 
     public virtual Gender GenderNavigation { get; set; } = null!;
 
@@ -38,6 +38,5 @@ public partial class Client
     public virtual ICollection<Document> Documents { get; set; } = new List<Document>();
 
     public virtual ICollection<Tag> Tags { get; set; } = new List<Tag>();
-    public Bitmap? Image => Photopath !=null? new Bitmap($@"Клиенты/{Photopath}") : null!;
+    public Bitmap? Image => Photopath != null ? new Bitmap($"./Клиенты/{Photopath}") : null!;
 }
-   

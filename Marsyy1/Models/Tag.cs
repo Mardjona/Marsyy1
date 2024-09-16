@@ -10,7 +10,6 @@ public partial class Tag
     public string Title { get; set; } = null!;
 
     public string Color { get; set; } = null!;
-
     public string ColorP => "#" + Color;
 
     public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
