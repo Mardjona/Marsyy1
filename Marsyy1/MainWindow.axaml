@@ -35,7 +35,7 @@
 				<ComboBoxItem>200</ComboBoxItem>
 			</ComboBox>
 
-			<Button VerticalAlignment="Top" Content="Добавить новых клиентов" Margin="10"/>
+			
 
 			<TextBlock  Margin="20"  Text="Д/Р в тек.месяце"></TextBlock>
 
@@ -96,10 +96,9 @@
 										</ListBox.ItemTemplate>
 									</ListBox>
 
-									<StackPanel Grid.Column="13">
-										<Button Click="DeliteServices_Click"  Name="aaaaa" Content="Удалить" HorizontalAlignment="Center" VerticalAlignment="Top" Tag="{Binding Id}" ></Button>
-										<Button Content="Редактировать" HorizontalAlignment="Right" VerticalAlignment="Bottom"> </Button>
-									</StackPanel>
+									
+										<Button  Grid.Column="13" Click="DeliteServices_Click"  Name="aaaaa" Content="Удалить" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="{Binding Id}" ></Button>
+									
 								</Grid>
 							</Border>
 						</DataTemplate>

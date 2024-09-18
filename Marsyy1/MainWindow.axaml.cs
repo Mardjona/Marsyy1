@@ -112,13 +112,25 @@ namespace Marsyy1
             int id = (int)(sender as Button).Tag;
             var client = Helper.Database.Clients.Find(id);
 
+        
+
             if (client != null)
             {
-                Helper.Database.Clients.Remove(client);
-                Helper.Database.SaveChanges();
+                if (client.Visits.Count <= 0)
+                {
+                    Helper.Database.Clients.Remove(client);
+                    Helper.Database.SaveChanges();
+                    Loadservices();
+                }
+                else
+                {
+                    Console.WriteLine("”даление кллиентов с посещени€ми запрещено");
+                }
             }
+            
+            
 
-            Loadservices();
+            
         }
         public void Edit(object? sender, PointerReleasedEventArgs e)
         {
@@ -128,6 +140,7 @@ namespace Marsyy1
             redandAdd.Show();
             Close();
         }
+       
 
 
 
