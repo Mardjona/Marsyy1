@@ -17,6 +17,7 @@ namespace Marsyy1
         public MainWindow()
         {
             InitializeComponent();
+            
             Loadservices();
 
         }
@@ -107,9 +108,10 @@ namespace Marsyy1
 
 
         }
+
         private void DeliteServices_Click(object sender, RoutedEventArgs e)
         {
-            int id = (int)(sender as Button).Tag;
+            int id = (int)(sender as Button)!.Tag!;
             var client = Helper.Database.Clients.Find(id);
 
         
@@ -132,14 +134,28 @@ namespace Marsyy1
 
             
         }
-        public void Edit(object? sender, PointerReleasedEventArgs e)
-        {
 
+        private void Add_Button(object sender, RoutedEventArgs e)
+        {
 
             RedandAdd redandAdd = new RedandAdd();
             redandAdd.Show();
             Close();
+
         }
+
+        public void Edit(object? sender, PointerReleasedEventArgs pointerReleasedEventArgs)
+        {
+            var client = ClientListBox.SelectedItem as Client;
+
+            RedandAdd redandAdd = new RedandAdd(client);
+                redandAdd.Show();
+                Close();
+            
+          
+
+        }
+           
        
 
 

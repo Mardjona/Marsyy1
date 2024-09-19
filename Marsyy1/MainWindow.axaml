@@ -37,9 +37,11 @@
 
 			
 
-			<TextBlock  Margin="20"  Text="Д/Р в тек.месяце"></TextBlock>
+			<TextBlock  Margin="10 20"  Text="Д/Р в тек.месяце"></TextBlock>
 
 			<CheckBox Name="onoff" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"></CheckBox>
+			
+			<Button Content="Добавить нового клиента" Margin="5" Click="Add_Button"></Button>
 
 			<TextBlock HorizontalAlignment="Right" Margin="100 13" FontSize="20" Name="Admin" Text="Админ"/>
 
@@ -66,15 +68,11 @@
 				<ListBox  MinWidth="1000"
 						  Name="ClientListBox"
 						  PointerReleased="Edit"
-						  SelectionMode="Multiple"
-						 
 						  ItemsSource="{Binding _filteredClients}">
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<Border BorderThickness="1"
-									BorderBrush="Orange"
-									
-								>
+									BorderBrush="Orange">
 								<Grid ColumnDefinitions="30,*,*,*,*,*,1.5*,1.5*,*,*,*,*,*,*" ShowGridLines="True">
 									<TextBlock Margin="2" Grid.Column="0" Text="{Binding Id}"/>
 									<TextBlock Margin="2" Grid.Column="1" Text="{Binding Firstname}"/>
