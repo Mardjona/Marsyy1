@@ -126,7 +126,8 @@ namespace Marsyy1
                 }
                 else
                 {
-                    Console.WriteLine("”даление кллиентов с посещени€ми запрещено");
+                    Console.WriteLine("”даление клиентов с посещени€ми запрещено");
+                   
                 }
             }
             
@@ -169,5 +170,8 @@ namespace Marsyy1
         private void CheckBox_Unchecked(object? sender, Avalonia.Interactivity.RoutedEventArgs e) => Loadservices();
         private void PageNavig_Selection(object? sender, Avalonia.Controls.SelectionChangedEventArgs e) => Loadservices();
 
+        private void Button_GotFocus(object? sender, Avalonia.Input.GotFocusEventArgs e)
+        {
+        }
     }
 }

@@ -95,7 +95,8 @@
 									</ListBox>
 
 									
-										<Button  Grid.Column="13" Click="DeliteServices_Click"  Name="aaaaa" Content="Удалить" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="{Binding Id}" ></Button>
+										<Button   Grid.Column="13" Click="DeliteServices_Click"  Content="Удалить" HorizontalAlignment="Center" VerticalAlignment="Center" Tag="{Binding Id}" ></Button>
+									
 									
 								</Grid>
 							</Border>

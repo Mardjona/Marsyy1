@@ -15,7 +15,7 @@ public partial class RedandAdd : Window
 
         CurrentClient = new Client();
 
-        ClientModel.DataContext = CurrentClient;
+        // ClientModel.DataContext = CurrentClient;
 
     }
 
@@ -33,5 +33,15 @@ public partial class RedandAdd : Window
     {
         Helper.Database.Clients.Update(CurrentClient);
         Helper.Database.SaveChanges();
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.Show();
+        this.Close();
+    }
+    public void Back_Button(object sender, RoutedEventArgs e)
+    {
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.Show();
+        this.Close();
     }
 }
+   

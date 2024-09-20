@@ -9,17 +9,19 @@
 	<StackPanel Margin="10" Spacing="10">
 		<TextBlock Grid.Row="1" Grid.Column="0" Text="Редактирование" FontSize="20" HorizontalAlignment="Center" Name="block_panelheder" ></TextBlock>
 		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите фамилию" Text="{Binding Firstname}"></TextBox>
-		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите имя"></TextBox>
-		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите отчество"></TextBox>
-		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите email"></TextBox>
-		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите телефон"></TextBox>
-		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите дату рождения"></TextBox>
-		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите пол "></TextBox>
-		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите фотографию "></TextBox>
+		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите имя" Text="{Binding Lastname}"></TextBox>
+		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите отчество"  Text="{Binding Patronymic}"></TextBox>
+		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите email"  Text="{Binding Email}"></TextBox>
+		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите телефон"  Text="{Binding Phone}"></TextBox>
+		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите дату рождения"  Text="{Binding #calendar.SelectedDate}"></TextBox>
+		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите пол" Text="{Binding Gender}"></TextBox>
+		<Button  Width="300" HorizontalAlignment="Left" ></Button>
 		<TextBox  Width="300" HorizontalAlignment="Left" Watermark="Введите"></TextBox>
+		<TextBox Width="300" HorizontalAlignment="Left" Watermark="Введите"></TextBox>
 	</StackPanel>
-		<Button  Margin="10" Grid.Row="1" Grid.Column="0" Content="Назад "></Button>
+		<Button  Margin="10" Grid.Row="1" Grid.Column="0" Content="Назад " Click="Back_Button"></Button>
 		<Button Click ="Save_Button" Margin="10" Grid.Row="1" Grid.Column="1" Content="Сохранить "></Button>
+		<Calendar SelectedDate="" Foreground="DarkViolet" Grid.Column="1" Margin=" 10"  VerticalAlignment="Top"></Calendar>
 	</Grid>
 	
 
